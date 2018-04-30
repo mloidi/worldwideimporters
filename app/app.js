@@ -15,7 +15,7 @@ var app = angular.module('app', ['ui.bootstrap', 'ngAnimate', 'ngRoute', 'ngMess
         }).when('/contact', {
             templateUrl: 'app/html/contact.html',
             controller: 'ContactController'
-        }).when('/detail/:id', {
+        }).when('/product/:name', {
             templateUrl: 'app/html/detail.html',
             controller: 'DetailController'
         });

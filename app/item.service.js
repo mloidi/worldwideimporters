@@ -57,10 +57,10 @@ app.factory('ItemService', ['$http', '$q', function ($http, $q) {
             }
             return aAllItems[Math.floor(Math.random() * aAllItems.length)];
         },
-        getCurrentItem: function (id) {
+        getCurrentItem: function (name) {
             var item;
             for (var indexItems = 0; indexItems < aAllItems.length; indexItems++) {
-                if (aAllItems[indexItems].id == id) {
+                if (aAllItems[indexItems].name == name) {
                     item = aAllItems[indexItems];
                     break;
                 }

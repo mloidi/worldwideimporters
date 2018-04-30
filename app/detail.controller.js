@@ -2,7 +2,7 @@
 
 app.controller('DetailController', ['$scope', '$routeParams', 'ItemService', function ($scope, $routeParams, itemService) {
     $scope.params = $routeParams;
-    $scope.item = itemService.getCurrentItem($scope.params.id);
+    $scope.item = itemService.getCurrentItem($scope.params.name);
     $scope.alerts = [];
 
     $scope.updateStock = function updateStock(item) {

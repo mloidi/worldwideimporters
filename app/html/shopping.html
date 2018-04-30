@@ -21,13 +21,14 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6">
-                <label>In stock </label>
+                <label>In Stock Only </label>
                 <input type="checkbox" ng-model="bStock" ng-true-value="0" ng-false-value="-1" />
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6">
-                <label>Order by </label>
+                <label>Sort By </label>
                 <select ng-model="orderItemsBy">
-                    <option value="name">Name</option>
+                    <option value="none">None</option>
+                    <option value="name">Alphabetical</option>
                     <option value="price">Price</option>
                     <option value="rating">Rating</option>
                 </select>
@@ -67,7 +68,7 @@
                             <span uib-rating ng-model="item.rating" max="5" read-only="true" aria-labelledby="default-rating"></span>
                             <p>Stock: {{item.stock}}</p>
                             <p>
-                                <a ng-href="#!detail/{{item.id}}" class="btn btn-default ml-btn">
+                                <a ng-href="#!product/{{item.name}}" class="btn btn-default ml-btn">
                                     Details
                                     <i class="fa fa-edit" tooltip-placement="bottom" uib-tooltip="Item details"></i>
                                 </a>
