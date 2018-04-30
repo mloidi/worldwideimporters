@@ -12,7 +12,7 @@ app.use(function (req, res, next) {
 
 console.log('dirname', __dirname);
 app.use(express.static(__dirname));
-var server = app.listen('3000', function() {
+var server = app.listen('8080', function() {
     var host = server.address().address;
     var port = server.address().port;
     console.log('listening at port:'+ port);
