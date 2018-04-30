@@ -1,0 +1,135 @@
+body {
+    padding-top: 70px;
+    background-color: #eeffcc;
+}
+
+span {
+    color: #777;
+    cursor: pointer;
+}
+
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+    cursor: pointer;
+}
+
+.ml-background {
+    background-color: #e6ffb3 !important;
+}
+
+.ml-btn {
+    background-color: #77b300;
+    color: white;
+    border-color: #446600;
+}
+
+.ml-btn:hover {
+    background-color: #558000;
+    border-color: #446600;
+    color: white;
+}
+
+.ml-thumbnail {
+    height: 550px !important;
+}
+
+.ml-img-thumbnail-size {
+    height: 200px !important;
+    width: 200px !important;
+    border-color: #ddd !important;
+    padding: 10px 15px !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-radius: 4px !important;
+}
+
+.ml-img-size {
+    height: 400px !important;
+    width: 400px !important;
+}
+
+.ml-img-size-cart {
+    height: 50px !important;
+    width: 50px !important;
+}
+
+.ml-menu-item {
+    cursor: pointer;
+}
+
+.ml-submenu-item {
+    padding-left: 10px;
+    cursor: pointer;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    background-color: #77b300;
+    color: white;
+}
+
+.ml-submenu-item>.badge {
+    float: right;
+}
+
+.ml-submenu-item:hover {
+    background-color: #558000;
+    color: white;
+}
+
+.ml-text {
+    margin: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.ml-icons {
+    font-size: 24px
+}
+
+.ml-a {
+    color: #446600;
+}
+
+.ml-panel-heading {
+    color: #333 !important;
+    background-color: #e6ffb3 !important;
+    border-color: #ddd !important;
+    padding: 10px 15px !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-radius: 4px !important;
+}
+
+.ml-panel {
+    border-color: #ddd !important;
+    margin-bottom: 20px !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-radius: 4px !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05) !important;
+    padding: 10px;
+}
+
+.panel-default .panel-heading {
+    background-color: #e6ffb3 !important;
+}
+
+.ml-caption {
+    border-color: #ddd !important;
+    padding: 10px 15px !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-radius: 4px !important;
+    margin-left: 10px;
+}
+
+#message {
+    position: absolute;
+    top: 10%;
+    z-index: 105;
+    width: 80%
+}

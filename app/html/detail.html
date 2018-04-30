@@ -1,0 +1,40 @@
+<div class="row">
+    <div id="message" class="col-xs-12">
+        <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="dismissAlert($index)" dismiss-on-timeout="2000">
+            <i class="{{alert.icon}}"></i>{{alert.text}}</div>
+    </div>
+</div>
+<div class="row text-left text-xs-center text-sm-left text-md-left">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <a class="btn btn-default ml-btn" href="#!shopping">Go back
+            <i class="fa fa-shopping-basket"></i>
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-3">
+        <img class="center-block img-responsive ml-img-thumbnail-size" src="{{item.imagelink}}">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-9">
+        <div class="ml-caption">
+            <h3>{{item.name}}</h3>
+            <p>{{item.description}}</p>
+            <p>Price: {{item.price | currency}}</p>
+            <span uib-rating ng-model="item.rating" max="5" read-only="true" aria-labelledby="default-rating"></span>
+            <p>Stock: {{item.stock}}</p>
+            <p>
+                <input type="number" min="0" ng-model="item.quantity" value="{{item.quantity}}" ng-change="updateStock(item)" />
+            </p>
+            <p>
+                <a ng-click="addItem(item)" class="btn btn-default ml-btn" ng-disabled="item.quantity < 1 || item.stock < 0">Add cart
+                    <i class="fa fa-cart-plus"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+</div>

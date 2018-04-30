@@ -1,0 +1,216 @@
+<div class="row text-left text-xs-center text-sm-left text-md-left">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <a class="btn btn-default ml-btn" href="#!shopping">Go back
+            <i class="fa fa-shopping-basket"></i>
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <br>
+    </div>
+</div>
+<div class="row">
+    <div id="message" class="col-xs-12">
+        <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="dismissAlert($index)" dismiss-on-timeout="2000">
+            <i class="{{alert.icon}}"></i>{{alert.text}}</div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-7">
+        <div class="row">
+            <div class="panel panel-default">
+                <table class="table table-hover">
+                    <thead class="ml-panel-heading">
+                        <tr>
+                            <th>Item</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Remove item</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="itemCart in cart">
+                            <td>
+                                <img class="center-block img-responsive ml-img-size-cart" src="{{itemCart.imagelink}}">
+                            </td>
+                            <td>{{itemCart.name}}</td>
+                            <td>{{itemCart.description}}</td>
+                            <td>{{itemCart.price | currency}}</td>
+                            <td>
+                                <input type="number" min="0" ng-model="itemCart.quantity" value="{{itemCart.quantity}}" ng-change="updatePrice(itemCart)"
+                                />
+                            </td>
+                            <td>
+                                <a ng-click="removeItem(itemCart)">
+                                    <i class="fa fa-trash ml-icons text-green"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-5 col-md-offset-7 ml-caption text-right">
+                <p>Total price: {{totalPrice | currency}}</p>
+                <p>Taxes: {{taxes}} %</p>
+                <p>Total price with taxes: {{totalPriceWithTaxes | currency}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 ml-caption">
+        <form name="orderForm" role="form" class="form-horizontal" data-toggle="validator">
+
+            <div class="form-group has-feedback" ng-class="{ 'has-error': orderForm.inputName.$invalid && !orderForm.inputName.$pristine, 'has-success': !orderForm.inputName.$invalid && !orderForm.inputName.$pristine }">
+                <label for="inputName" class="col-xs-12 col-sm-12 col-md-2 control-label">Name</label>
+                <div class="col-xs-12 col-sm-12 col-md-10">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="fa fa-user"></span>
+                        </div>
+                        <input ng-model="formData.inputName" type="text" class="form-control" id="inputName" name="inputName" placeholder="Your Name"
+                            required>
+                    </div>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="orderForm.inputName.$invalid && !orderForm.inputName.$pristine"></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="!orderForm.inputName.$invalid && !orderForm.inputName.$pristine"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{ 'has-error': orderForm.inputEmail.$invalid && !orderForm.inputEmail.$pristine, 'has-success': !orderForm.inputEmail.$invalid && !orderForm.inputEmail.$pristine }">
+                <label for="inputEmail" class="col-xs-12 col-sm-12 col-md-2 control-label">Email</label>
+                <div class="col-xs-12 col-sm-12 col-md-10">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="fa fa-envelope"></span>
+                        </div>
+                        <input ng-model="formData.inputEmail" type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Your Email"
+                            required/>
+                    </div>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="orderForm.inputEmail.$invalid && !orderForm.inputEmail.$pristine"></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="!orderForm.inputEmail.$invalid && !orderForm.inputEmail.$pristine"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{ 'has-error': orderForm.inputPhone.$invalid && !orderForm.inputPhone.$pristine, 'has-success': !orderForm.inputPhone.$invalid && !orderForm.inputPhone.$pristine }">
+                <label for="inputPhone" class="col-xs-12 col-sm-12 col-md-2 control-label">Phone</label>
+                <div class="col-xs-12 col-sm-12 col-md-10">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="fa fa-phone"></span>
+                        </div>
+                        <input ng-model="formData.inputPhone" type="number" class="form-control" id="inputPhone" name="inputPhone"
+                            placeholder="Your Phone" required/>
+                    </div>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="orderForm.inputPhone.$invalid && !orderForm.inputPhone.$pristine"></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="!orderForm.inputPhone.$invalid && !orderForm.inputPhone.$pristine"></span>
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{ 'has-error': orderForm.inputAddress.$invalid && !orderForm.inputAddress.$pristine, 'has-success': !orderForm.inputAddress.$invalid && !orderForm.inputAddress.$pristine }">
+                <label for="inputAddress" class="col-xs-12 col-sm-12 col-md-2 control-label">Address 1</label>
+                <div class="col-xs-12 col-sm-12 col-md-10">
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="fa fa-address-book"></span>
+                        </div>
+                        <input ng-model="formData.inputAddress" type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="Address address, P.O. box, company name, c/o"
+                            required>
+                    </div>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="orderForm.inputAddress.$invalid && !orderForm.inputAddress.$pristine"></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="!orderForm.inputAddress.$invalid && !orderForm.inputAddress.$pristine"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{ 'has-error': orderForm.inputCity.$invalid && !orderForm.inputCity.$pristine, 'has-success': !orderForm.inputCity.$invalid && !orderForm.inputCity.$pristine }">
+                <label for="inputCity" class="col-xs-12 col-sm-12 col-md-2 control-label">City</label>
+                <div class="col-xs-12 col-sm-12 col-md-10">
+                    <input ng-model="formData.inputCity" type="text" class="form-control" id="inputCity" name="inputCity" placeholder="Los Alamitos"
+                        required>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="orderForm.inputCity.$invalid && !orderForm.inputCity.$pristine"></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="!orderForm.inputCity.$invalid && !orderForm.inputCity.$pristine"></span>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{ 'has-error': orderForm.inputState.$invalid && !orderForm.inputState.$pristine, 'has-success': !orderForm.inputState.$invalid && !orderForm.inputState.$pristine }">
+                <label for="inputState" class="col-xs-12 col-sm-12 col-md-2 control-label">State</label>
+                <div class="col-xs-12 col-sm-12 col-md-10">
+                    <select ng-model="formData.inputState" class="form-control" id="inputState" name="inputState" required>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="DC">District Of Columbia</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group has-feedback" ng-class="{ 'has-error': orderForm.inputZip.$invalid && !orderForm.inputZip.$pristine, 'has-success': !orderForm.inputZip.$invalid && !orderForm.inputZip.$pristine }">
+                <label for="inputZip" class="col-xs-12 col-sm-12 col-md-2 control-label">Zip</label>
+                <div class="col-xs-12 col-sm-12 col-md-10">
+                    <input ng-model="formData.inputZip" pattern="^\d{5}" type="text" class="form-control" id="inputZip" name="inputZip" placeholder="#####"
+                        required>
+                    <span class="glyphicon glyphicon-remove form-control-feedback" ng-show="orderForm.inputZip.$invalid && !orderForm.inputZip.$pristine"></span>
+                    <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="!orderForm.inputZip.$invalid && !orderForm.inputZip.$pristine"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-default ml-btn" ng-disabled="orderForm.$invalid" ng-click="submitOrder()">
+                        Order now!!!
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div uib-alert ng-hide="hideMessageOrder" class="alert-success" close="dismissMessageOrder()">
+            <i class="fa fa-check"></i>Order send!!!</div>
+    </div>
+</div>

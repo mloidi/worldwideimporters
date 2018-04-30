@@ -1,0 +1,86 @@
+<div class="row">
+    <div id="message" class="col-xs-12">
+        <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="dismissAlert($index)" dismiss-on-timeout="2000">
+            <i class="{{alert.icon}}"></i>{{alert.text}}</div>
+    </div>
+</div>
+<div class="row ml-panel-heading">
+    <div class="col-xs-12 col-sm-12 col-md-3">
+        <h3>{{selectedSubCategory}}</h3>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-9">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <label>Minimun price: </label>
+                <input type="number" min="0" ng-model="minPrice" value="{{minPrice | currency}}" />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <label>Maximun price: </label>
+                <input type="number" min="0" ng-model="maxPrice" value="{{maxPrice | currency}}" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <label>In stock </label>
+                <input type="checkbox" ng-model="bStock" ng-true-value="0" ng-false-value="-1" />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <label>Order by </label>
+                <select ng-model="orderItemsBy">
+                    <option value="name">Name</option>
+                    <option value="price">Price</option>
+                    <option value="rating">Rating</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<hr/>
+<div class="row ml-panel">
+    <div class="col-xs-12 col-sm-12 col-md-3">
+        <uib-accordion close-others="true">
+            <div ng-repeat="category in categories">
+                <div uib-accordion-group class="panel-default ml-background" is-open="status.open">
+                    <uib-accordion-heading>
+                        {{category.category}}
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    </uib-accordion-heading>
+                    <div ng-repeat="subcategory in category.subcategories">
+                        <a class="ml-submenu-item" ng-click="setSubcategory(subcategory)">{{subcategory.name}}
+                            <i class="badge">{{subcategory.items.length}}</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </uib-accordion>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-9">
+        <div class="row">
+            <div ng-repeat="item in filterItemsArray = (allItems | filter: filterItems | orderBy: orderItemsBy)">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    <div class="thumbnail ml-thumbnail">
+                        <img class="center-block img-responsive ml-img-thumbnail-size" src="{{item.imagelink}}">
+                        <div class="caption">
+                            <h3>{{item.name}}</h3>
+                            <p>{{item.description}}</p>
+                            <p>Price: {{item.price | currency}}</p>
+                            <span uib-rating ng-model="item.rating" max="5" read-only="true" aria-labelledby="default-rating"></span>
+                            <p>Stock: {{item.stock}}</p>
+                            <p>
+                                <a ng-href="#!detail/{{item.id}}" class="btn btn-default ml-btn">
+                                    Details
+                                    <i class="fa fa-edit" tooltip-placement="bottom" uib-tooltip="Item details"></i>
+                                </a>
+                                <a ng-click="addItem(item)" class="btn btn-default ml-btn" ng-disabled="item.stock == 0">Add cart
+                                    <i class="fa fa-cart-plus"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div uib-alert ng-hide="filterItemsArray.length" class="alert-warning">
+                <span class="fa fa-exclamation-triangle"></span>No items for the search</div>
+        </div>
+    </div>
+</div>
